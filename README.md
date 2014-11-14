@@ -1,5 +1,7 @@
 # Chronicler
 
+[![Build Status](https://travis-ci.org/justinhoward/chronicler.svg?branch=master)](https://travis-ci.org/justinhoward/chronicler)
+
 A flexible logging library for javascript.
 
 ```js
