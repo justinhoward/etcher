@@ -17,7 +17,7 @@ proto.handle = function(level, message, context) {
         return false;
     }
 
-    var args = ['[' + level.toUpperCase() + ']: ' + message];
+    var args = ['[' + level.toUpperCase() + '] ' + message];
     if (typeof context !== 'undefined') {
         args[1] = context;
     }

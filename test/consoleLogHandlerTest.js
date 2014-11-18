@@ -8,7 +8,7 @@ describe('ConsoleLogHandler', function() {
         var args;
         var console = {
             error: function(message, context) {
-                expect(message).to.equal('[ALERT]: test');
+                expect(message).to.equal('[ALERT] test');
                 expect(context).to.equal('ctx');
                 done();
             }
@@ -23,7 +23,7 @@ describe('ConsoleLogHandler', function() {
         var args;
         var console = {
             warn: function(message, context) {
-                expect(message).to.equal('[WARNING]: test');
+                expect(message).to.equal('[WARNING] test');
                 expect(context).to.equal('ctx');
                 done();
             }
@@ -38,7 +38,7 @@ describe('ConsoleLogHandler', function() {
         var args;
         var console = {
             info: function(message, context) {
-                expect(message).to.equal('[DEBUG]: test');
+                expect(message).to.equal('[DEBUG] test');
                 expect(context).to.equal('ctx');
                 done();
             }
