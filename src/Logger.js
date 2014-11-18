@@ -19,6 +19,10 @@ Logger.isAtLeast = function(minimumLevel, level) {
 };
 
 proto.log = function(level, message, context) {
+    if (!Logger.positions.hasOwnProperty(level)) {
+        throw new Error('invalid log level ' + level);
+    }
+
     if (context instanceof Error) {
       context = {error: context};
     } else if ('' + context !== '[object Object]') {

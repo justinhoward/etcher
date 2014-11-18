@@ -59,4 +59,11 @@ describe('Logger', function() {
 
         logger.warning('', error);
     });
+
+    it('catches invalid levels', function() {
+        var logger = new Logger({handle: function() {}});
+        expect(function() {
+            logger.log('asdf');
+        }).to.Throw(Error);
+    });
 });
