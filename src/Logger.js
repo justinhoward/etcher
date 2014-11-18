@@ -19,7 +19,17 @@ Logger.isAtLeast = function(minimumLevel, level) {
 };
 
 proto.log = function(level, message, context) {
-    this._handler.handle(level, message, context);
+    if (context instanceof Error) {
+      context = {error: context};
+    } else if ('' + context !== '[object Object]') {
+        context = {value: context};
+    }
+
+    this._handler.handle({
+        level: level,
+        message: message,
+        context: context
+    });
 };
 
 Logger.levels.forEach(function(level) {

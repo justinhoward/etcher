@@ -12,19 +12,19 @@ proto.setConsole = function(console) {
     this._console = console;
 };
 
-proto.handle = function(level, message, context) {
-    if (!this._console || !Logger.isAtLeast(this._level, level)) {
+proto.handle = function(log) {
+    if (!this._console || !Logger.isAtLeast(this._level, log.level)) {
         return false;
     }
 
-    var args = ['[' + level.toUpperCase() + '] ' + message];
-    if (typeof context !== 'undefined') {
-        args[1] = context;
+    var args = ['[' + log.level.toUpperCase() + '] ' + log.message];
+    if (typeof log.context !== 'undefined') {
+        args[1] = log.context;
     }
 
-    if (Logger.isAtLeast('error', level)) {
+    if (Logger.isAtLeast('error', log.level)) {
         this._console.error.apply(this._console, args);
-    } else if (Logger.isAtLeast('warning', level)) {
+    } else if (Logger.isAtLeast('warning', log.level)) {
         this._console.warn.apply(this._console, args);
     } else {
         this._console.info.apply(this._console, args);

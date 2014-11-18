@@ -16,7 +16,7 @@ describe('ConsoleLogHandler', function() {
 
         var handler = new ConsoleLogHandler('warning');
         handler.setConsole(console);
-        handler.handle('alert', 'test', 'ctx');
+        handler.handle({level: 'alert', message: 'test', context: 'ctx'});
     });
 
     it('can log a warning', function(done) {
@@ -31,7 +31,7 @@ describe('ConsoleLogHandler', function() {
 
         var handler = new ConsoleLogHandler('warning');
         handler.setConsole(console);
-        handler.handle('warning', 'test', 'ctx');
+        handler.handle({level: 'warning', message: 'test', context: 'ctx'});
     });
 
     it('can log a debug', function(done) {
@@ -46,7 +46,7 @@ describe('ConsoleLogHandler', function() {
 
         var handler = new ConsoleLogHandler('debug');
         handler.setConsole(console);
-        handler.handle('debug', 'test', 'ctx');
+        handler.handle({level: 'debug', message: 'test', context: 'ctx'});
     });
 
     it('does not log if level is too low', function() {
@@ -59,7 +59,7 @@ describe('ConsoleLogHandler', function() {
 
         var handler = new ConsoleLogHandler('warning');
         handler.setConsole(console);
-        handler.handle('debug', 'test');
+        handler.handle({level: 'debug', message: 'test', context: {}});
         expect(called).to.equal(false);
     });
 });

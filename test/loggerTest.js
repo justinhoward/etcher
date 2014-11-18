@@ -28,24 +28,35 @@ describe('Logger', function() {
     });
 
     it('can log something', function(done) {
-        var logger = new Logger({handle: function(level, message, context) {
-            expect(level).to.equal('alert');
-            expect(message).to.equal('test');
-            expect(context).to.equal('ctx');
+        var context = {};
+        var logger = new Logger({handle: function(log) {
+            expect(log.level).to.equal('alert');
+            expect(log.message).to.equal('test');
+            expect(log.context).to.equal(context);
             done();
         }});
 
-        logger.log('alert', 'test', 'ctx');
+        logger.log('alert', 'test', context);
     });
 
     it('can log with the critical method', function(done) {
-        var logger = new Logger({handle: function(level, message, context) {
-            expect(level).to.equal('critical');
-            expect(message).to.equal('test');
-            expect(context).to.equal('ctx');
+        var logger = new Logger({handle: function(log) {
+            expect(log.level).to.equal('critical');
+            expect(log.message).to.equal('test');
+            expect(log.context).to.have.property('value', 'ctx');
             done();
         }});
 
         logger.critical('test', 'ctx');
+    });
+
+    it('can log with an error context', function(done) {
+        var error = new Error();
+        var logger = new Logger({handle: function(log) {
+            expect(log.context).to.have.property('error', error);
+            done();
+        }});
+
+        logger.warning('', error);
     });
 });
