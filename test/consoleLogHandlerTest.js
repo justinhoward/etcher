@@ -60,6 +60,6 @@ describe('ConsoleLogHandler', function() {
         var handler = new ConsoleLogHandler('warning');
         handler.setConsole(console);
         handler.handle({level: 'debug', message: 'test', context: {}});
-        expect(called).to.equal(false);
+        expect(called).to.be.false();
     });
 });

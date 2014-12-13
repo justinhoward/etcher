@@ -22,9 +22,9 @@ describe('Logger', function() {
     });
 
     it('can say if a level is at least a minimum', function() {
-        expect(Logger.isAtLeast('warning', 'error')).to.equal(true);
-        expect(Logger.isAtLeast('emergency', 'info')).to.equal(false);
-        expect(Logger.isAtLeast('critical', 'critical')).to.equal(true);
+        expect(Logger.isAtLeast('warning', 'error')).to.be.true();
+        expect(Logger.isAtLeast('emergency', 'info')).to.be.false();
+        expect(Logger.isAtLeast('critical', 'critical')).to.be.true();
     });
 
     it('can log something', function(done) {
