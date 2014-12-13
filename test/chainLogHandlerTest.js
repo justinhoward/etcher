@@ -2,12 +2,15 @@
 
 var expect = require('chai').expect;
 var ChainLogHandler = require('../src/ChainLogHandler');
+var Log = require('../src/Log');
 
 describe('ChainLogHandler', function() {
     it('calls handlers until the log is handled', function() {
         var a = false, b = false, c = false;
+        var log = new Log('info');
         var handlers = [
-            {handle: function() {
+            {handle: function(log) {
+                expect(log).to.equal(log);
                 a = true;
                 return false;
             }},
@@ -20,7 +23,7 @@ describe('ChainLogHandler', function() {
             }}
         ];
         var handler = new ChainLogHandler(handlers);
-        handler.handle({level: 'warning', message: 'test', context: 'ctx'});
+        handler.handle(log);
 
         expect(a).to.be.true();
         expect(b).to.be.true();
@@ -39,7 +42,7 @@ describe('ChainLogHandler', function() {
             }}
         ];
         var handler = new ChainLogHandler(handlers, false);
-        handler.handle({level: 'warning', message: 'test', context: 'ctx'});
+        handler.handle(new Log('warning'));
 
         expect(a).to.be.true();
         expect(b).to.be.true();

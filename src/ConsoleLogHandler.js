@@ -1,6 +1,6 @@
 'use strict';
 
-var Logger = require('./Logger');
+var Log = require('./Log');
 
 function ConsoleLogHandler(level) {
     this._level = level;
@@ -13,18 +13,18 @@ proto.setConsole = function(console) {
 };
 
 proto.handle = function(log) {
-    if (!this._console || !Logger.isAtLeast(this._level, log.level)) {
+    if (!this._console || !log.isAtLeast(this._level)) {
         return false;
     }
 
-    var args = ['[' + log.level.toUpperCase() + '] ' + log.message];
-    if (typeof log.context !== 'undefined') {
-        args[1] = log.context;
+    var args = ['[' + log.getLevel().toUpperCase() + '] ' + log.getMessage()];
+    if (log.hasContext()) {
+        args[1] = log.getContext();
     }
 
-    if (Logger.isAtLeast('error', log.level)) {
+    if (log.isAtLeast('error')) {
         this._console.error.apply(this._console, args);
-    } else if (Logger.isAtLeast('warning', log.level)) {
+    } else if (log.isAtLeast('warning')) {
         this._console.warn.apply(this._console, args);
     } else {
         this._console.info.apply(this._console, args);

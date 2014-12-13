@@ -1,7 +1,5 @@
 'use strict';
 
-var Logger = require('./Logger');
-
 function ChainLogHandler(handlers, bubble) {
     this._handlers = handlers;
     this._bubble = bubble !== false;
