@@ -2,12 +2,23 @@
 
 var Log = require('./Log');
 
+/**
+ * Logs to the global console log
+ *
+ * @param {string} level The minimum level to log
+ */
 function ConsoleLogHandler(level) {
     this._level = level;
     this._console = global.console;
 }
 var proto = ConsoleLogHandler.prototype;
 
+/**
+ * Set the console object. By default this is the global
+ * console, but this can override it.
+ *
+ * @param {console} console A substitute console object
+ */
 proto.setConsole = function(console) {
     this._console = console;
 };

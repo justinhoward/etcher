@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * A composite log handler that can distribute
+ * logs to multiple child log handlers
+ *
+ * @param {array[handler]} handlers An array of child handlers
+ * @param {boolean} [bubble] Default: false. If true, handling will stop after
+ *     the log is handled successfully.
+ */
 function ChainLogHandler(handlers, bubble) {
     this._handlers = handlers;
     this._bubble = !!bubble;
