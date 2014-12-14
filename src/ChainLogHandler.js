@@ -2,7 +2,7 @@
 
 function ChainLogHandler(handlers, bubble) {
     this._handlers = handlers;
-    this._bubble = bubble !== false;
+    this._bubble = !!bubble;
 }
 var proto = ChainLogHandler.prototype;
 
