@@ -1,6 +1,6 @@
 {
   "name": "etcher",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A flexible logging library",
   "homepage": "https://github.com/justinhoward/etcher.git",
   "main": "index.js",
