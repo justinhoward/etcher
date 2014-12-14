@@ -26,7 +26,7 @@ describe('ConsoleLogHandler', function() {
         var console = {
             warn: function(message, context) {
                 expect(message).to.equal('[WARNING] test');
-                expect(context).to.equal(ctx);
+                expect(context).to.deep.equal(ctx);
                 done();
             }
         };

@@ -1,10 +1,12 @@
 'use strict';
 
 function Log(level, message, context) {
+    this._context = {};
+    this._attributes = {};
+
     this.setContext(context);
     this.setMessage(message);
     this.setLevel(level);
-    this._attributes = {};
 }
 var proto = Log.prototype;
 
@@ -72,7 +74,12 @@ proto.setContext = function(context) {
         }
     }
 
-    this._context = context;
+    for (var param in context) {
+        if (context.hasOwnProperty(param)) {
+            this._context[param] = context[param];
+        }
+    }
+
     return this;
 };
 
@@ -103,7 +110,12 @@ proto.getAttributes = function() {
 };
 
 proto.setAttributes = function(attributes) {
-    this._attributes = attributes || {};
+    attributes = attributes || {};
+    for (var name in attributes) {
+        if (attributes.hasOwnProperty(name)) {
+            this._attributes[name] = attributes[name];
+        }
+    }
 };
 
 module.exports = Log;

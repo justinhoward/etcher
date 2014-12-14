@@ -5,11 +5,11 @@ var Log = require('../src/Log');
 
 describe('Log', function() {
     it('can be constructed', function() {
-        var ctx = {};
+        var ctx = {foo: 'foo val'};
         var log = new Log('info', 'hi', ctx);
         expect(log.getLevel()).to.equal('info');
         expect(log.getMessage()).to.equal('hi');
-        expect(log.getContext()).to.equal(ctx);
+        expect(log.getContext()).to.deep.equal(ctx);
     });
 
     it('can set the level', function() {
@@ -56,9 +56,9 @@ describe('Log', function() {
 
     it('can set the context to an object', function() {
         var log = new Log('info');
-        var ctx = {};
+        var ctx = {foo: 'foo val'};
         log.setContext(ctx);
-        expect(log.getContext()).to.equal(ctx);
+        expect(log.getContext()).to.deep.equal(ctx);
     });
 
     it('can check if it has a context', function() {
@@ -68,11 +68,20 @@ describe('Log', function() {
         expect(log.hasContext()).to.be.true();
     });
 
+    it('sets context by merging with existing', function() {
+        var log = new Log('info', '', {foo: 'foo orig', bar: 'bar orig'});
+        log.setContext({bar: 'bar new'});
+        expect(log.get('foo')).to.equal('foo orig');
+        expect(log.get('bar')).to.equal('bar new');
+    });
+
     it('can set attributes to an object', function() {
         var log = new Log('info');
-        var attrs = {};
-        log.setAttributes(attrs);
-        expect(log.getAttributes()).to.equal(attrs);
+        log.setAttributes({foo: 'foo orig', bar: 'bar orig'});
+        expect(log.getAttribute('bar')).to.equal('bar orig');
+        log.setAttributes({bar: 'bar new'});
+        expect(log.getAttribute('foo')).to.equal('foo orig');
+        expect(log.getAttribute('bar')).to.equal('bar new');
     });
 
     it('has levels', function() {
