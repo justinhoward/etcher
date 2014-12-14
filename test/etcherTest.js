@@ -1,12 +1,12 @@
 'use strict';
 
 var expect = require('chai').expect;
-var Logger = require('../src/Logger');
+var Etcher = require('../src/Etcher');
 
-describe('Logger', function() {
+describe('Etcher', function() {
     it('can log something', function(done) {
         var context = {};
-        var logger = new Logger({handle: function(log) {
+        var logger = new Etcher({handle: function(log) {
             expect(log.getLevel()).to.equal('alert');
             expect(log.getMessage()).to.equal('test');
             expect(log.getContext()).to.equal(context);
@@ -17,7 +17,7 @@ describe('Logger', function() {
     });
 
     it('can log with the critical method', function(done) {
-        var logger = new Logger({handle: function(log) {
+        var logger = new Etcher({handle: function(log) {
             expect(log.getLevel()).to.equal('critical');
             expect(log.getMessage()).to.equal('test');
             expect(log.get('foo')).to.equal('foo val');

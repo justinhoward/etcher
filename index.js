@@ -1,9 +1,10 @@
 'use strict';
 
-var logger = require('./src/Logger');
-logger.handler = {
+var etcher = require('./src/Etcher');
+etcher.handler = {
     console: require('./src/ConsoleLogHandler'),
     chain: require('./src/ChainLogHandler')
 };
+etcher.log = require('./src/Log');
 
-module.exports = logger;
+module.exports = etcher;

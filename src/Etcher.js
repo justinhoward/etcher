@@ -1,10 +1,10 @@
 'use strict';
 var Log = require('./Log');
 
-function Logger(handler) {
+function Etcher(handler) {
     this._handler = handler;
 }
-var proto = Logger.prototype;
+var proto = Etcher.prototype;
 
 proto.log = function(log) {
     if (typeof log === 'string') {
@@ -20,4 +20,4 @@ Log.levels.forEach(function(level) {
     };
 });
 
-module.exports = Logger;
+module.exports = Etcher;
