@@ -1,9 +1,9 @@
 'use strict';
 
 function Log(level, message, context) {
-    this.setLevel(level);
-    this.setMessage(message);
     this.setContext(context);
+    this.setMessage(message);
+    this.setLevel(level);
     this._attributes = {};
 }
 var proto = Log.prototype;
@@ -43,6 +43,11 @@ proto.getMessage = function() {
 };
 
 proto.setMessage = function(message) {
+    if (message instanceof Error) {
+        this.set('error', message);
+        message = message.message;
+    }
+
     this._message = message || '';
     return this;
 };

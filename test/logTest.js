@@ -36,6 +36,13 @@ describe('Log', function() {
         expect(log.getMessage()).to.equal('hi');
     });
 
+    it('can set the message to an error', function() {
+        var error = new Error('a message');
+        var log = new Log('error', error);
+        expect(log.getMessage()).to.equal('a message');
+        expect(log.get('error')).to.equal(error);
+    });
+
     it('can set the context to an error', function() {
         var error = new Error();
         var log = new Log('info', '', error);
