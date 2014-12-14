@@ -2,9 +2,9 @@
 
 var etcher = require('./src/Etcher');
 etcher.handler = {
-    console: require('./src/ConsoleLogHandler'),
-    chain: require('./src/ChainLogHandler')
+    ConsoleLogHandler: require('./src/ConsoleLogHandler'),
+    ChainLogHandler: require('./src/ChainLogHandler')
 };
-etcher.log = require('./src/Log');
+etcher.Log = require('./src/Log');
 
 module.exports = etcher;
