@@ -26,4 +26,13 @@ describe('Etcher', function() {
 
         logger.critical('test', {foo: 'foo val'});
     });
+
+    it('can create a log', function() {
+        var logger = new Etcher();
+        var ctx = {foo: 'foo val'};
+        var log = logger.createLog('info', 'my message', ctx);
+        expect(log.getLevel()).to.equal('info');
+        expect(log.getMessage()).to.equal('my message');
+        expect(log.getContext()).to.deep.equal(ctx);
+    });
 });
