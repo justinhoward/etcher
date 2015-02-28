@@ -1,6 +1,8 @@
-# Etcher
+# Etcher [![npm version](https://badge.fury.io/js/etcher.svg)](http://badge.fury.io/js/etcher)
 
-[![Build Status](https://travis-ci.org/justinhoward/etcher.svg?branch=master)](https://travis-ci.org/justinhoward/etcher)
+[![Build Status](https://travis-ci.org/justinhoward/etcher.svg)](https://travis-ci.org/justinhoward/etcher)
+[![Code Climate](https://codeclimate.com/github/justinhoward/etcher/badges/gpa.svg)](https://codeclimate.com/github/justinhoward/etcher)
+[![Test Coverage](https://codeclimate.com/github/justinhoward/etcher/badges/coverage.svg)](https://codeclimate.com/github/justinhoward/etcher)
 
 A flexible logging library for javascript.
 

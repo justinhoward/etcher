@@ -1,3 +1,11 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
+addons:
+  code_climate:
+    repo_token:
+        secure: UkVziPP2kd9eUp/4mvdlhIZr0YXMRsjOpfqH+YyrWzDMZzWO/zmIiz74UPrKLCzAeTWo4Yd1qYTq1fib+PMtZMsmjKTHZKTFEeR6iZEl7V+T5BBPelOJ7dSq9gDX4PPpHJ8IcwFb5rdxwUXLXaizh2PkumF+CFtsbMXHz3gRwQY=
+script:
+- npm run cover
+after_script:
+- npm run publish-coverage
