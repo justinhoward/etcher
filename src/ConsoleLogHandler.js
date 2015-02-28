@@ -1,7 +1,5 @@
 'use strict';
 
-var Log = require('./Log');
-
 /**
  * Logs to the global console log
  *
