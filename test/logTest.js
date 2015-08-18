@@ -68,11 +68,28 @@ describe('Log', function() {
         expect(log.hasContext()).to.be.true();
     });
 
+    it('can check if it has a context when Object prototype is extended', function() {
+        Object.prototype.foo = 1234;
+        var log = new Log('info');
+        expect(log.hasContext()).to.be.false();
+        log.set('foo', 'foo val');
+        expect(log.hasContext()).to.be.true();
+        delete Object.prototype.foo;
+    });
+
     it('sets context by merging with existing', function() {
         var log = new Log('info', '', {foo: 'foo orig', bar: 'bar orig'});
         log.setContext({bar: 'bar new'});
         expect(log.get('foo')).to.equal('foo orig');
         expect(log.get('bar')).to.equal('bar new');
+    });
+
+    it('only sets context own properties', function() {
+        var log = new Log('info');
+        var Ctor = function() {};
+        Ctor.prototype = {foo: 1234};
+        log.setContext(new Ctor());
+        expect(log.getContext().foo).to.equal(undefined);
     });
 
     it('can set attributes to an object', function() {
@@ -82,6 +99,20 @@ describe('Log', function() {
         log.setAttributes({bar: 'bar new'});
         expect(log.getAttribute('foo')).to.equal('foo orig');
         expect(log.getAttribute('bar')).to.equal('bar new');
+    });
+
+    it('only sets attributes own properties', function() {
+        var log = new Log('info');
+        var Ctor = function() {};
+        Ctor.prototype = {foo: 1234};
+        log.setAttributes(new Ctor());
+        expect(log.getAttribute('foo')).to.equal(undefined);
+    });
+
+    it('can get all attributes', function() {
+        var log = new Log('info');
+        log.setAttribute('foo', 1234);
+        expect(log.getAttributes()).to.deep.equal({foo: 1234});
     });
 
     it('has levels', function() {

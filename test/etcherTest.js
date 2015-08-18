@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 var Etcher = require('../src/Etcher');
+var Log = require('../src/Log');
 
 describe('Etcher', function() {
     it('can log something', function(done) {
@@ -34,5 +35,18 @@ describe('Etcher', function() {
         expect(log.getLevel()).to.equal('info');
         expect(log.getMessage()).to.equal('my message');
         expect(log.getContext()).to.deep.equal(ctx);
+    });
+
+    it('can log a preconstructed log', function(done) {
+        var ctx = {foo: 'foo val'};
+        var log = new Log('info', 'my message', ctx);
+        var logger = new Etcher({handle: function(log) {
+            expect(log.getLevel()).to.equal('info');
+            expect(log.getMessage()).to.equal('my message');
+            expect(log.getContext()).to.deep.equal(ctx);
+            done();
+        }});
+
+        logger.log(log);
     });
 });

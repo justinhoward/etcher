@@ -240,7 +240,6 @@ proto.getAttributes = function() {
  * @return {this}
  */
 proto.setAttributes = function(attributes) {
-    attributes = attributes || {};
     for (var name in attributes) {
         if (attributes.hasOwnProperty(name)) {
             this._attributes[name] = attributes[name];
